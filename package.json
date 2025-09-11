@@ -1,0 +1,9 @@
+{
+  "name": "backend-fastapi",
+  "version": "0.1.0",
+  "scripts": {
+    "dev": "poetry run uvicorn src.app.main:app --reload --host 0.0.0.0 --port 3003",
+    "start": "poetry run uvicorn src.app.main:app --host 0.0.0.0 --port 3003",
+    "build": "echo 'FastAPI doesn’t need build step, only install dependencies'"
+  }
+}
