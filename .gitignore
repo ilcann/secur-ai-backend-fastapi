@@ -1,0 +1,47 @@
+# ----------------------------
+# Python
+# ----------------------------
+**/__pycache__/
+*.py[cod]
+*.pyo
+*.pyd
+*.pyc
+*.pdb
+*.egg
+*.egg-info/
+*.manifest
+*.spec
+
+# ----------------------------
+# Poetry / Virtualenv
+# ----------------------------
+# Poetry virtualenv inside project
+.venv/
+venv/
+env/
+ENV/
+*.env
+
+# Poetry cache
+.cache/
+__pypackages__/
+
+# ----------------------------
+# Editor / OS
+# ----------------------------
+.vscode/
+.idea/
+.DS_Store
+Thumbs.db
+
+# ----------------------------
+# Logs
+# ----------------------------
+*.log
+
+# ----------------------------
+# Uvicorn / FastAPI
+# ----------------------------
+# Reload files
+*.db-journal
+*.sqlite3
