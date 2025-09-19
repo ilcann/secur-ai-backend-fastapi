@@ -53,11 +53,12 @@ class NerGlinerService(NerBaseService):
     async def fetch_labels(self) -> List[EntityLabelDto]:
         try:
             async with httpx.AsyncClient() as client:
-                url = f"http://{NESTJS_HOST}:{NESTJS_PORT}/entity-labels"
+                url = f"http://{NESTJS_HOST}:{NESTJS_PORT}/labels"
                 res = await client.get(url)
                 res.raise_for_status()
-                raw_labels = res.json()
-                return [EntityLabelDto(**l) for l in raw_labels]
+                response_json = res.json()
+                labels_data = response_json.get("data", {}).get("labels", [])
+                return [EntityLabelDto(**l) for l in labels_data]
         except Exception as err:
             raise HTTPException(status_code=502, detail=f"Failed to fetch labels: {err}")
     

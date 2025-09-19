@@ -13,13 +13,13 @@ def extract_entities(request: ExtractRequest):
     entities = ner_service.extract_entities(request.text)
     return ExtractResponse(entities=entities)
 
-@ner_router.post("/entity-labels/sync")
+@ner_router.post("/labels/sync")
 async def sync_labels():
     labels = await ner_service.fetch_labels()
     keys = ner_service.extract_keys(labels)
     ner_service.update_labels(keys)
     return {"status": "ok", "synced_labels": keys}
 
-@ner_router.get('/entity-labels')
+@ner_router.get('/labels')
 def get_labels():
     return ner_service.get_labels()
