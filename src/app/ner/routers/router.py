@@ -1,5 +1,6 @@
 from typing import List
 from app.ner.schemas import EntityLabelDto
+from app.ner.services.presidio import NerPresidioService
 from fastapi import APIRouter, HTTPException
 from app.ner.schemas import ExtractRequest, ExtractResponse
 from app.ner.services import NerBaseService, NerGlinerService
@@ -7,11 +8,15 @@ from app.ner.services import NerBaseService, NerGlinerService
 ner_router = APIRouter()
 
 ner_service: NerBaseService = NerGlinerService()
+presidio_service: NerBaseService = NerPresidioService()
 
 @ner_router.post("/extract", response_model=ExtractResponse)
 def extract_entities(request: ExtractRequest):
-    entities = ner_service.extract_entities(request.text)
-    return ExtractResponse(entities=entities)
+    ner_entities = ner_service.extract_entities(request.text)
+    presidio_entities = presidio_service.extract_entities(request.text)
+    print("Ner Entities:", ner_entities)
+    print("Presidio Entities:", presidio_entities)
+    return ExtractResponse(entities=ner_entities)
 
 @ner_router.post("/labels/sync")
 async def sync_labels():
