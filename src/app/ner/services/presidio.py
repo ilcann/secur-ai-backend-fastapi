@@ -43,6 +43,6 @@ class NerPresidioService(NerBaseService):
             return []
         return [label.key for label in labels]
     def extract_entities(self, text: str) -> List[NerEntity]:
-        raw_entities = self.model.analyze(text, entities=self.labels)
+        raw_entities = self.model.analyze(text, entities=self.labels, language='en')
         entities = [NerEntity(**ent) for ent in raw_entities]
         return entities
