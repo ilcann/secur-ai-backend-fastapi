@@ -23,6 +23,7 @@ async def sync_labels():
     labels = await ner_service.fetch_labels()
     keys = ner_service.extract_keys(labels)
     ner_service.update_labels(keys)
+    presidio_entities = presidio_service.update_labels(keys)
     return {"status": "ok", "synced_labels": keys}
 
 @ner_router.get('/labels')
